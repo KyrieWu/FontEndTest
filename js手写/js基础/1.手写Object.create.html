@@ -15,6 +15,12 @@
             F.prototype = obj
             return new F()
         }
+
+        function create1(obj) {
+            function F() { }
+            F.prototype = obj
+            return new F()
+        }
     </script>
 </body>
 

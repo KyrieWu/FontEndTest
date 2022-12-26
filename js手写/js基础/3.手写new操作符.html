@@ -14,13 +14,11 @@
             let newObject = null
             let constructor = Array.prototype.shift(arguments)
             let result = null
-
             // 判断参数是否是一个函数
             if (typeof constructor !== 'function') {
                 console.error('type error')
                 return
             }
-
             // 创建一个空对象，对象的原型是构造函数 prototype 对象
             newObject = Object.create(constructor.prototype)
             // 将 this 指向新建对象，并执行函数
@@ -28,6 +26,22 @@
             // 判断返回对象
             let flag = result && (typeof result === 'object' || typeof result === 'function')
             // 判断返回结果
+            return flag ? result : newObject
+        }
+
+        function objectFactory2() {
+            let newObject = null
+            let constructor = Array.prototype.shift(arguments)
+            let result = null
+            // 判断参数是否是一个函数
+            if (typeof constructor !== 'function') {
+                console.error('type error')
+                return
+            }
+
+            newObject = Object.create(constructor.prototype)
+            result = constructor.apply(newObject, arguments)
+            let flag = result && (typeof result === 'object' || typeof result == 'function')
             return flag ? result : newObject
         }
 
