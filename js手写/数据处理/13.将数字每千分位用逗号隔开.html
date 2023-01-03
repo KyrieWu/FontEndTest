@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 数字有小数的版本
+        // let format = n => {
+        //     let num = n.toString()
+        //     let decimals = ''
+        //     // 判断是否有小数
+        //     num.indexOf('.') > -1 ? decimals = num.split('.')[1] : decimals
+        //     let len = num.length
+        //     if (len <= 3) {
+        //         return num
+        //     } else {
+        //         let temp = ''
+        //         let remainder = len % 3
+        //         decimals ? temp = '.' + decimals : temp
+        //         if (remainder > 0) {
+        //             return num.slice(0, remainder) + ',' + num.slice(remainder, len).match(/\d{3}/g).join(',') + temp
+        //         } else {
+        //             return num.slice(0, len).match(/\d{3}/g).join(',') + temp
+        //         }
+        //     }
+        // }
+        // console.log(format(12323.33));
+
+        //数字无小数版本
+        let format = n => {
+            let num = n.toString()
+            let len = num.length
+            if (len <= 3) {
+                return num
+            } else {
+                let remainder = len % 3
+                if (remainder > 0) { // 不是3的整数倍
+                    return num.slice(0, remainder) + ',' + num.slice(remainder, len).match(/\d{3}/g).join(',')
+                } else { // 是3的整数倍
+                    return num.slice(0, len).match(/\d{3}/g).join(',')
+                }
+            }
+        }
+        console.log(format(1232323));
+
+    </script>
+</body>
+
+</html>
