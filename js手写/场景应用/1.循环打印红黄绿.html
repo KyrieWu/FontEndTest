@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const _RED = 'red'
+        const _GREEN = 'green'
+        const _YELLOW = 'yellow'
+
+        // 用 callback 实现
+        // const task = (timer, light, callback) => {
+        //     setTimeout(() => {
+        //         if (light === _RED) {
+        //             console.log(_RED);
+        //         } else if (light === _GREEN) {
+        //             console.log(_GREEN);
+        //         } else if (light === _YELLOW) {
+        //             console.log(_YELLOW);
+        //         }
+        //         callback()
+        //     }, timer)
+        // }
+        // const step = () => {
+        //     task(3000, _RED, () => {
+        //         task(2000, _GREEN, () => {
+        //             task(1000, _YELLOW, step)
+        //         })
+        //     })
+        // }
+        // step()
+
+        // 用 promise 实现
+        // const task = (timer, light) => {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             if (light === _RED) {
+        //                 console.log(_RED);
+        //             } else if (light === _GREEN) {
+        //                 console.log(_GREEN);
+        //             } else if (light === _YELLOW) {
+        //                 console.log(_YELLOW);
+        //             }
+        //             resolve()
+        //         }, timer)
+        //     })
+        // }
+        // const step = () => {
+        //     task(3000, _RED).then(() => task(2000, _GREEN)).then(() => task(1000, _YELLOW)).then(step)
+        // }
+        // step()
+
+        // 用 async/await 实现
+        const task = (timer, light) => {
+            setTimeout(() => {
+                if (light === _RED) {
+                    console.log(_RED);
+                } else if (light === _GREEN) {
+                    console.log(_GREEN);
+                } else if (light === _YELLOW) {
+                    console.log(_YELLOW);
+                }
+            }, timer)
+        }
+        const taskRunner = async () => {
+            await task(3000, _RED)
+            await task(2000, _GREEN)
+            await task(1000, _YELLOW)
+            taskRunner()
+        }
+        taskRunner()
+    </script>
+</body>
+
+</html>
