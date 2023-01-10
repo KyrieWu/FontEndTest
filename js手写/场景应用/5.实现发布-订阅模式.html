@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class EventCenter {
+            // 1.定义事件容器，用来装事件数组
+            handlers = {};
+
+            addEventListener(type, handler) {
+                if (!this.handlers[type]) {
+                    this.handlers[type] = []
+                }
+                this.handlers[type].push(handler)
+            }
+
+            // 触发事件，参数：事件名， 事件参数
+            dispatchEvent(type, params) {
+                if (!this.handlers[type]) {
+                    return new Error('该事件未注册')
+                }
+                this.handlers[type].forEach(handler => {
+                    handler(...params)
+                })
+            }
+
+            // 移除事件，参数：事件名、要删除事件，若无第二个参数则删除该事件的订阅和发布
+            removeEventListener(type, handler) {
+                if (!this.handlers[type]) {
+                    return new Error('事件无效')
+                }
+                if (!handler) {
+                    delete this.handlers[type]
+                } else {
+                    const index = this.handlers[type].findIndex(el => el === handler)
+                    if (index === -1) {
+                        return new Error('无该绑定事件')
+                    }
+                    this.handlers[type].splice(index, 1)
+                    if (this.handlers[type].length === 0) {
+                        delete this.handlers[type]
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
